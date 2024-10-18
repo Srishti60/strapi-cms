@@ -4,7 +4,7 @@
   "info": {
     "singularName": "blog",
     "pluralName": "blogs",
-    "displayName": "Blog",
+    "displayName": "Blogs",
     "description": ""
   },
   "options": {
@@ -12,23 +12,69 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "title": {
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": true,
+      "maxLength": 250
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "Hospitality & Food Service",
+        "Gifting Products",
+        "Eco Lifestyle",
+        "Textiles & Apparel",
+        "Office Supplies & Equipment"
+      ],
+      "required": true
+    },
+    "summury": {
+      "type": "text",
+      "required": true,
+      "maxLength": 255
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
     },
     "description": {
       "type": "blocks"
     },
-    "image": {
+    "isFeatured": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "profileImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "type": "media",
-      "multiple": false
+        "files"
+      ]
+    },
+    "date": {
+      "type": "date"
+    },
+    "readTime": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "json"
     }
   }
 }

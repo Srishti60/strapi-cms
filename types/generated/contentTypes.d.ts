@@ -585,18 +585,49 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
   info: {
     singularName: 'blog';
     pluralName: 'blogs';
-    displayName: 'Blog';
+    displayName: 'Blogs';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    name: Schema.Attribute.String &
+    title: Schema.Attribute.String &
       Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 250;
+      }>;
+    category: Schema.Attribute.Enumeration<
+      [
+        'Hospitality & Food Service',
+        'Gifting Products',
+        'Eco Lifestyle',
+        'Textiles & Apparel',
+        'Office Supplies & Equipment',
+      ]
+    > &
+      Schema.Attribute.Required;
+    summury: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    thumbnail: Schema.Attribute.Media<'images'>;
+    slug: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
     description: Schema.Attribute.Blocks;
-    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    isFeatured: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    name: Schema.Attribute.String;
+    profileImage: Schema.Attribute.Media<'images' | 'files'>;
+    date: Schema.Attribute.Date;
+    readTime: Schema.Attribute.String;
+    tags: Schema.Attribute.JSON;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
